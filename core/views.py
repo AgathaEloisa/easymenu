@@ -6,4 +6,4 @@ class LoginView(View):
         context = {
 
         }
-        return render(request, 'login.html', context)
+        return render(request, 'index.html', context)
