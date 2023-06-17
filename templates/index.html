@@ -1,1 +1,11 @@
 <h1>index Works!</h1>
+<form method="POST">
+    {% csrf_token %}
+    Usuario:<br>
+    <input type="text" name="username"></input>
+    <br><br>
+    Contraseña:<br>
+    <input type="password" name="password"></input>
+    <br><br>
+    <button type="submit">Entrar</button>
+</form>

@@ -1,0 +1,10 @@
+// Funcionario
+{"_id": "0", "num_funcionario": 0, "nombre_completo":"Caridad Zheng", "rut":"17903842-0", "rol":[0], "direccion":"Avenida Vicuña Mackenna Poniente 7131", "comuna": "La Florida","telefono":26391567, "nacionalidad":"chilena", "genero":"F", "fecha_nac": {"$date":"1979-12-17T04:00:00Z"}}
+// Mesas
+{"_id": "0", "codigo":0, "encargado":"0", "area":0, "cantidad_personas":4}
+// permiso
+{"_id": "0", "codigo":0, "rol":"mesero", "permiso":["ver pedido","cambiar estado pedido","ocultar productos"]}
+// atención
+{"_id": "0", "fecha":{"$date":"2023-06-16T04:00:00Z"}, "estado":0 , "num_mesa":0, "mesero":0, "pedido": [{"producto":"0", "cantidad":2, "total":3000, "comentario":""}], "total":3000}
+// estado
+{"_id": "0", "codigo":0, "nombre":"en espera"}
