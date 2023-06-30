@@ -1,1 +1,33 @@
-This is admin
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    <a href="{% url 'administracion:nuevo_producto'%}">
+        <button type="submit">Nuevo</button>
+    </a>
+    <br><br>
+    This is admin
+    <br><br>
+    <ul>
+    {% for producto in products %}
+    <li>
+        <a href="{% url 'administracion:detalle_producto' codigo=producto.codigo%}">
+            {{producto.nombre}}
+        </a>
+    <br>
+    <a href="{% url 'administracion:editar_producto' producto.codigo%}">
+        <button>Editar</button>
+    </a>
+    </li>
+    {% endfor %}
+    </ul>
+    
+</div>
+</body>
+</html>

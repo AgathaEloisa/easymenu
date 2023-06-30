@@ -36,10 +36,11 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',
     'easyMenu',
     'administracion'
 ]
@@ -90,6 +91,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'easyMenu',
+        'HOST': 'localhost',
+        'PORT': 27017
         # 'CLIENT': {
         #     'host':'27017'
         # }

@@ -1,0 +1,24 @@
+<html>
+    <head>
+      <title>{% block title %}{% endblock %}</title>
+      {% load bootstrap5 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript %}
+    </head>
+    <body>
+    
+    <div class="container">
+        Editar producto
+    <form method="POST">
+        {% csrf_token %}
+        categoria<br>{{prod.categoria}}<br>
+        codigo<br> {{prod.codigo}}<br>
+        nombre<br> {{prod.nombre}}<br>
+        precio<br> {{prod.precio}}<br>
+        descripcion <br>{{prod.descripcion}}<br><br>
+        <button type="submit">Submit</button>
+    <form>
+    
+    </div>
+    </body>
+    </html>
