@@ -15,12 +15,14 @@ class carta(models.Model):
         return self.nombre
     
 class productos(models.Model):
-    # _id = models.ObjectIdField()
+    numeroProducto = models.IntegerField()
     categoria = models.CharField(max_length=50)
-    codigo = models.IntegerField()
     nombre = models.CharField(max_length=50)
     precio = models.IntegerField()
     descripcion = models.TextField(max_length=250)
 
     def __str__(self) -> str:
         return self.nombre
+
+    class Meta:
+        db_table = 'productos'

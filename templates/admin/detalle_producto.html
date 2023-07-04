@@ -11,12 +11,14 @@
         Editar producto
     <form method="POST">
         {% csrf_token %}
+        numeroProducto<br>{{prod.numeroProducto}}<br>
         categoria<br>{{prod.categoria}}<br>
-        codigo<br> {{prod.codigo}}<br>
         nombre<br> {{prod.nombre}}<br>
         precio<br> {{prod.precio}}<br>
         descripcion <br>{{prod.descripcion}}<br><br>
-        <button type="submit">Submit</button>
+        <a href="{% url 'administracion:home'%}">volver</a>
+        <br>
+        <a href="{% url 'administracion:editar_producto' prod.numeroProducto%}">editar</a>
     <form>
     
     </div>

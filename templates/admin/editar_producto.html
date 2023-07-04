@@ -11,14 +11,14 @@
         Editar producto
     <form method="POST">
         {% csrf_token %}
+        numeroProducto<br>{{form.numeroProducto}}<br>
         categoria<br>{{form.categoria}}<br>
-        codigo<br> {{form.codigo}}<br>
         nombre<br> {{form.nombre}}<br>
         precio<br> {{form.precio}}<br>
         descripcion <br>{{form.descripcion}}<br><br>
-        <button type="submit">Submit</button>
+        <button type="submit">Editar</button>
     <form>
     
     </div>
     </body>
-    </html>
+    </html> 
