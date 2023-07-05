@@ -8,25 +8,46 @@
 <body>
 
 <div class="container">
-    <a href="{% url 'administracion:nuevo_producto'%}">
-        <button type="submit">Nuevo</button>
-    </a>
     <br><br>
-    This is admin
-    <br><br>
-    <ul>
-    {% for producto in products %}
-    <li>
-        <a href="{% url 'administracion:detalle_producto' producto.numeroProducto %}">
-            {{producto.nombre}}
-        </a>
-    <br>
-    <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
-        <button>Editar</button>
-    </a>
-    </li>
-    {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-10"><h1>Menú</h1></div>
+        <div class="col-2">    <a href="{% url 'administracion:nuevo_producto'%}">
+            <button type="button" class="btn btn-success">Nuevo</button>
+        </a></div>
+    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Producto</th>
+            <th scope="col">acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for producto in products %}
+          <tr>
+            <th scope="row">{{producto.numeroProducto}}</th>
+            <td>
+                <a href="{% url 'administracion:detalle_producto' producto.numeroProducto %}">
+                    {{producto.nombre}}
+                </a>
+            </td>
+            <td>
+                {{producto.categoria}}
+            </td>
+            <td>
+                <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
+                    <button>Editar</button>
+                </a>
+                <a href="{% url 'administracion:eliminar_producto' producto.numeroProducto %}">
+                    <button>Eliminar</button>
+                </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     
 </div>
 </body>

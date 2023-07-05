@@ -8,16 +8,17 @@
 <body>
 
 <div class="container">
-    Nuevo producto
-<form method="POST">
+  <h1>Nuevo producto</h1>
+  <div class="d-flex justify-content-center pt-4">
+<form method="POST" class="border border-2 border-primary p-3  rounded">
     {% csrf_token %}
-    categoria<br>{{form.categoria}}<br>
-    nombre<br> {{form.nombre}}<br>
-    precio<br> {{form.precio}}<br>
+    categoria<br>{{form.categoria}}<br><br>
+    nombre<br> {{form.nombre}}<br><br>
+    precio<br> {{form.precio}}<br><br>
     descripcion <br>{{form.descripcion}}<br><br>
     <button type="submit">Submit</button>
 <form>
-
+</div>
 </div>
 </body>
 </html>
