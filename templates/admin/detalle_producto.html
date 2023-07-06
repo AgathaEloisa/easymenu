@@ -7,20 +7,24 @@
     </head>
     <body>
     
-    <div class="container">
-        Editar producto
-    <form method="POST">
-        {% csrf_token %}
-        numeroProducto<br>{{prod.numeroProducto}}<br>
-        categoria<br>{{prod.categoria}}<br>
-        nombre<br> {{prod.nombre}}<br>
-        precio<br> {{prod.precio}}<br>
-        descripcion <br>{{prod.descripcion}}<br><br>
-        <a href="{% url 'administracion:home'%}">volver</a>
-        <br>
-        <a href="{% url 'administracion:editar_producto' prod.numeroProducto%}">editar</a>
-    <form>
-    
-    </div>
+        <div class="container">
+            <form method="POST" class="pt-3">
+                {% csrf_token %}
+                <label for="nombre">Producto: </label>
+                <h3 id="nombre" class="pb-3">{{prod.nombre}}</h3>
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>número de producto:</strong> {{prod.numeroProducto}}</li>
+                    <li class="list-group-item"><strong>categoria:</strong> {{prod.categoria}}</li>
+                    <li class="list-group-item"><strong>precio:</strong> ${{prod.precio}}</li>
+                    <li class="list-group-item"><strong>descripcion:</strong> {{prod.descripcion}}</li>
+                    </ul>
+                </div>
+                <div style="width: 18rem;" class="d-flex justify-content-end grid gap-0 row-gap-3">
+                    <a href="{% url 'administracion:home'%}" class="p-2">volver</a>
+                    <a href="{% url 'administracion:editar_producto' prod.numeroProducto%}" class="p-2">editar</a>
+                </div>
+            <form>
+        </div>
     </body>
-    </html>
+</html>

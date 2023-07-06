@@ -1,4 +1,14 @@
-<h1>index Works!</h1>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+    <div class="card position-absolute top-50 start-50  translate-middle" style="width: 18rem;">
+<div class="pt-4 border border-2 border-primary p-3 rounded">
+<h1>Login</h1>
 <form method="POST">
     {% csrf_token %}
     Usuario:<br>
@@ -7,5 +17,10 @@
     Contraseña:<br>
     <input type="password" name="password"></input>
     <br><br>
-    <button type="submit">Entrar</button>
+    <button type="submit" class="btn btn-primary">Entrar</button>
 </form>
+</div>
+</div>
+</div>
+</body>
+</html>
