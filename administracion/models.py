@@ -1,6 +1,9 @@
 from django.db import models
+from djongo import models
+import uuid
 
 class carta(models.Model):
+    #  _id = models.ObjectIdField()
     nombre = models.CharField(max_length=50)
     fecha_creacion = models.DateField(auto_now=False, auto_now_add=False)
     # productos = models.ForeignKey(productos, related_name='productos')
@@ -15,7 +18,9 @@ class carta(models.Model):
         return self.nombre
     
 class productos(models.Model):
-    numeroProducto = models.IntegerField()
+    id = models.ObjectIdField()
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    numeroProducto = models.IntegerField(unique=True)
     categoria = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     precio = models.IntegerField()

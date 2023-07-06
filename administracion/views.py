@@ -52,12 +52,8 @@ def EditarProductoView(request, numeroProducto):
     return render(request, 'admin/editar_producto.html',{'form':form})
 
 def eliminarProductoView(request, numeroProducto):
-    prod = get_object_or_404(productos, numeroProducto = numeroProducto)
+    prod = productos.objects.filter(numeroProducto = numeroProducto)
     if request.method == 'POST':
         prod.delete()
         return redirect('administracion:home')
     return render(request, 'admin/eliminar_producto.html', {'prod':prod})
-            # if(numeroProducto == ''):
-            #     numeroProducto = int(len(products)+1) 
-            # else: 
-            #     numeroProducto = form.cleaned_data['numeroProducto']
