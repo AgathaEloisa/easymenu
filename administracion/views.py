@@ -19,18 +19,21 @@ def NuevoProductoView(request):
         'form': form
     }
     products = productos.objects.all()
-
+    last_product = products.last().numeroProducto
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            numeroProducto = int(len(products)+1)
-            categoria = form.cleaned_data['categoria']
-            nombre = form.cleaned_data['nombre']
-            precio = form.cleaned_data['precio']
-            descripcion = form.cleaned_data['descripcion']
-            
-            p, created = productos.objects.get_or_create(numeroProducto=numeroProducto, categoria=categoria, nombre=nombre, precio=precio, descripcion=descripcion)
-            p.save()
+            numeroProducto = last_product + 1  if last_product else 1
+            producto = form.save(commit=False)
+            producto.numeroProducto = numeroProducto
+            producto.save()
+            # categoria = form.cleaned_data['categoria']
+            # nombre = form.cleaned_data['nombre']
+            # precio = form.cleaned_data['precio']
+            # descripcion = form.cleaned_data['descripcion']
+
+            # p, created = productos.objects.get_or_create(numeroProducto=numeroProducto, categoria=categoria, nombre=nombre, precio=precio, descripcion=descripcion)
+            # p.save()
             
             return redirect('administracion:home')
     
@@ -46,9 +49,10 @@ def detalleProductoView(request, numeroProducto):
 def EditarProductoView(request, numeroProducto):
     prod = productos.objects.get(numeroProducto=numeroProducto)
     form = ProductoForm(request.POST or None, instance=prod)
-    if form.is_valid():
-        form.save()
-        return redirect('administracion:home')
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('administracion:home')
     return render(request, 'admin/editar_producto.html',{'prod':prod, 'form': form})
 
 def eliminarProductoView(request, numeroProducto):
