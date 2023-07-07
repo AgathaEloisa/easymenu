@@ -44,12 +44,12 @@ def detalleProductoView(request, numeroProducto):
     return render(request, 'admin/detalle_producto.html', context)
 
 def EditarProductoView(request, numeroProducto):
-    prod = get_object_or_404(productos, numeroProducto = numeroProducto)
-    form = ProductoForm(request.POST or None, request.FILES or None, instance=prod)
+    prod = productos.objects.get(numeroProducto=numeroProducto)
+    form = ProductoForm(request.POST or None, instance=prod)
     if form.is_valid():
         form.save()
-        return redirect('administracion:detalle_producto')
-    return render(request, 'admin/editar_producto.html',{'form':form})
+        return redirect('administracion:home')
+    return render(request, 'admin/editar_producto.html',{'prod':prod, 'form': form})
 
 def eliminarProductoView(request, numeroProducto):
     prod = productos.objects.filter(numeroProducto = numeroProducto)
