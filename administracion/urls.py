@@ -1,6 +1,7 @@
+"""Rutas del módulo de administración"""
 from django.urls import path
-from .views import AdminView, NuevoProductoView, detalleProductoView, EditarProductoView, eliminarProductoView
-
+from .views import AdminView, NuevoProductoView, detalleProductoView
+from .views import EditarProductoView, eliminarProductoView
 app_name = 'administracion'
 
 urlpatterns = [

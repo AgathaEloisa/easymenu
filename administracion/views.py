@@ -1,9 +1,8 @@
-from django.views.generic import View, UpdateView
+"""Vistas del módulo de administración"""
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import carta, productos
+from .models import productos
 from .forms import ProductoForm
-from django.urls import reverse_lazy
 
 @login_required
 def AdminView(request):
@@ -14,29 +13,46 @@ def AdminView(request):
     return render(request, 'admin/admin.html', context)
 
 def NuevoProductoView(request):
-    form = ProductoForm()
+    # products = productos.objects.all()
+    # last_product = products.last().numeroProducto if products else 0
+
+    # if request.method == 'POST':
+    #     form = ProductoForm(request.POST)
+    #     if form.is_valid():
+    #         numeroProducto = last_product + 1 if last_product else 1
+    #         form.instance.numeroProducto = numeroProducto
+    #         form.save()
+    #         return redirect('administracion:home')
+    # else:
+    #     initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
+    #     form = ProductoForm(initial=initial_data)
+
+    # context = {'form': form}
+    # return render(request, 'admin/nuevo_producto.html', context)
+
+    products = productos.objects.all()
+    last_product = products.last().numeroProducto
+    initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
+    form = ProductoForm(initial=initial_data)
     context = {
         'form': form
     }
-    products = productos.objects.all()
-    last_product = products.last().numeroProducto
+
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            numeroProducto = last_product + 1  if last_product else 1
-            producto = form.save(commit=False)
-            producto.numeroProducto = numeroProducto
-            producto.save()
-            # categoria = form.cleaned_data['categoria']
-            # nombre = form.cleaned_data['nombre']
-            # precio = form.cleaned_data['precio']
-            # descripcion = form.cleaned_data['descripcion']
-
-            # p, created = productos.objects.get_or_create(numeroProducto=numeroProducto, categoria=categoria, nombre=nombre, precio=precio, descripcion=descripcion)
-            # p.save()
-            
+            # producto = form.save(commit=False)
+            # producto.numeroProducto = numeroProducto
+            # producto.save()
+            numeroProducto = form.cleaned_data['numeroProducto']
+            categoria = form.cleaned_data['categoria']
+            nombre = form.cleaned_data['nombre']
+            precio = form.cleaned_data['precio']
+            descripcion = form.cleaned_data['descripcion']
+            p, created = productos.objects.get_or_create(numeroProducto=numeroProducto,categoria=categoria,nombre=nombre,precio=precio,descripcion=descripcion)
+            p.save()
             return redirect('administracion:home')
-    
+
     return render(request, 'admin/nuevo_producto.html', context)
 
 def detalleProductoView(request, numeroProducto):

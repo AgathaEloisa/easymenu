@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from djongo import models
 import uuid
@@ -18,8 +19,6 @@ class carta(models.Model):
         return self.nombre
     
 class productos(models.Model):
-    # id = models.ObjectIdField()
-    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     numeroProducto = models.IntegerField(primary_key=True)
     categoria = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
