@@ -6,49 +6,83 @@
   {% bootstrap_javascript %}
 </head>
 <body>
-
-<div class="container">
-    <br><br>
-    <div class="row">
-        <div class="col-10"><h1>Menú</h1></div>
-        <div class="col-2">    <a href="{% url 'administracion:nuevo_producto'%}">
-            <button type="button" class="btn btn-success">Nuevo</button>
-        </a></div>
+  <div class="container d-flex justify-content-between">
+    {% comment %} Menú {% endcomment %}
+    <div class="container">
+      <br><br>
+      <div class="row">
+          <div class="col-10"><h1>Menús</h1>
+            <a href="{% url 'administracion:nuevo_menu'%}">
+              <button type="button" class="btn btn-success">Nuevo</button>
+          </a>
+        </div>
+      </div>
+      <table class="table">
+          <tbody>
+          {% for menu in menus %}
+            <tr>
+              <td>
+                  <a href="{% url 'administracion:detalle_producto' menu.numeroMenu %}">
+                      {{menu.nombre}}
+                  </a> <br>
+                  {{menu.descripcion}}
+                  <br> <br>
+                  <a href="{% url 'administracion:editar_producto' menu.numeroMenu %}">
+                      <button class="btn btn-outline-primary">Editar</button>
+                  </a>
+                  <a href="{% url 'administracion:eliminar_producto' menu.numeroMenu %}">
+                      <button class="btn btn-outline-primary">Eliminar</button>
+                  </a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      
+  </div>
+  {% comment %} Productos {% endcomment %}
+  <div class="container">
+      <br><br>
+      <div class="row">
+          <div class="col-10"><h1>Productos</h1></div>
+          <div class="col-2">    <a href="{% url 'administracion:nuevo_producto'%}">
+              <button type="button" class="btn btn-success">Nuevo</button>
+          </a></div>
+      </div>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for producto in products %}
+            <tr>
+              <th scope="row">{{producto.numeroProducto}}</th>
+              <td>
+                  <a href="{% url 'administracion:detalle_producto' producto.numeroProducto %}">
+                      {{producto.nombre}}
+                  </a>
+              </td>
+              <td>
+                  {{producto.categoria}}
+              </td>
+              <td>
+                  <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
+                      <button class="btn btn-outline-primary">Editar</button>
+                  </a>
+                  <a href="{% url 'administracion:eliminar_producto' producto.numeroProducto %}">
+                      <button class="btn btn-outline-primary">Eliminar</button>
+                  </a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Producto</th>
-            <th scope="col">acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for producto in products %}
-          <tr>
-            <th scope="row">{{producto.numeroProducto}}</th>
-            <td>
-                <a href="{% url 'administracion:detalle_producto' producto.numeroProducto %}">
-                    {{producto.nombre}}
-                </a>
-            </td>
-            <td>
-                {{producto.categoria}}
-            </td>
-            <td>
-                <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
-                    <button class="btn btn-outline-primary">Editar</button>
-                </a>
-                <a href="{% url 'administracion:eliminar_producto' producto.numeroProducto %}">
-                    <button class="btn btn-outline-primary">Eliminar</button>
-                </a>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    
-</div>
+  </div>
 </body>
 </html>

@@ -1,37 +1,22 @@
 """Vistas del módulo de administración"""
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import productos
-from .forms import ProductoForm
+from .models import productos, Menu
+from .forms import ProductoForm, MenuForm
 
 @login_required
 def AdminView(request):
     products = productos.objects.all()
+    menus = Menu.objects.all()
     context = {
-        'products': products
+        'products': products,
+        'menus' : menus
     }
     return render(request, 'admin/admin.html', context)
 
 def NuevoProductoView(request):
-    # products = productos.objects.all()
-    # last_product = products.last().numeroProducto if products else 0
-
-    # if request.method == 'POST':
-    #     form = ProductoForm(request.POST)
-    #     if form.is_valid():
-    #         numeroProducto = last_product + 1 if last_product else 1
-    #         form.instance.numeroProducto = numeroProducto
-    #         form.save()
-    #         return redirect('administracion:home')
-    # else:
-    #     initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
-    #     form = ProductoForm(initial=initial_data)
-
-    # context = {'form': form}
-    # return render(request, 'admin/nuevo_producto.html', context)
-
-    products = productos.objects.all()
-    last_product = products.last().numeroProducto
+    products = productos.objects.all() 
+    last_product = products.last().numeroProducto if products else 0
     initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
     form = ProductoForm(initial=initial_data)
     context = {
@@ -41,9 +26,6 @@ def NuevoProductoView(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            # producto = form.save(commit=False)
-            # producto.numeroProducto = numeroProducto
-            # producto.save()
             numeroProducto = form.cleaned_data['numeroProducto']
             categoria = form.cleaned_data['categoria']
             nombre = form.cleaned_data['nombre']
@@ -77,3 +59,29 @@ def eliminarProductoView(request, numeroProducto):
         prod.delete()
         return redirect('administracion:home')
     return render(request, 'admin/eliminar_producto.html', {'prod':prod})
+
+# Menu
+def NuevoMenuView(request):
+    products = productos.objects.all()
+    menu = Menu.objects.all()
+    last_menu = menu.last().numeroMenu if menu else 0
+    initial_data = {'numeroProducto': last_menu + 1} if last_menu else {'numeroProducto': 1}
+    form = MenuForm(initial=initial_data)
+    context = {
+        'form': form,
+        'products': products
+    }
+
+    if request.method == 'POST':
+        form = MenuForm(request.POST)
+        if form.is_valid():
+            numeroMenu = form.cleaned_data['numeroMenu']
+            nombre = form.cleaned_data['nombre']
+            fechaCreacion = form.cleaned_data['fechaCreacion']
+            producto = form.cleaned_data['productos']
+            descripcion = form.cleaned_data['descripcion']
+            p, created = productos.objects.get_or_create(numeroMenu=numeroMenu,nombre=nombre,fechaCreacion=fechaCreacion,producto=producto, descripcion=descripcion)
+            p.save()
+            return redirect('administracion:home')
+
+    return render(request, 'admin/nuevo_menu.html', context)

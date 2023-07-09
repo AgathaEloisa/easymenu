@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+<div class="container">
+    <h1>Nuevo producto</h1>
+    <div class="container d-flex justify-content-between">
+        {% comment %} formulario {% endcomment %}
+        <div class="d-flex justify-content-center pt-4">
+            <form method="POST" class="border border-2 border-primary p-3 rounded">
+                {% csrf_token %}
+                <div style="display: none">
+                numeroProducto<br>{{form.numeroProducto}}<br><br>
+                </div>
+                nombre<br> {{form.nombre}}<br><br>
+                fechaCreacion<br> {{form.fechaCreacion}}<br><br>
+                descripcion <br>{{form.descripcion}}<br><br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            <form>
+        </div>
+        {% comment %} lista {% endcomment %}
+        <div>
+            <ul class="list-group" style="width: 500px">
+                <li class="list-group-item">An item</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-10"><h5>Productos</h5></div>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Tipo</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for producto in products %}
+              <tr>
+                <th scope="row">{{producto.numeroProducto}}</th>
+                <td>
+                    <a href="{% url 'administracion:detalle_producto' producto.numeroProducto %}">
+                        {{producto.nombre}}
+                    </a>
+                    <br>
+                    {{producto.descripcion}}
+                </td>
+                <td>
+                    ${{producto.precio}}
+                </td>
+                <td>
+                    {{producto.categoria}}
+                </td>
+                <td>
+                    <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
+                        <button class="btn btn-outline-primary">Agregar</button>
+                    </a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+</body>
+</html>
