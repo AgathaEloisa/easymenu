@@ -17,6 +17,7 @@ class ProductoForm(forms.ModelForm):
 
 class MenuForm(forms.ModelForm, forms.Form):
     fechaCreacion = forms.DateField(widget=DateInput)
+    producto = forms.IntegerField(required=False)
     class Meta:
         model = Menu
         fields = ("numeroMenu", "nombre", "fechaCreacion", "producto", "descripcion")

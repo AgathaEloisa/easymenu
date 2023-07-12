@@ -65,7 +65,7 @@ def NuevoMenuView(request):
     products = productos.objects.all()
     menu = Menu.objects.all()
     last_menu = menu.last().numeroMenu if menu else 0
-    initial_data = {'numeroProducto': last_menu + 1} if last_menu else {'numeroProducto': 1}
+    initial_data = {'numeroMenu': last_menu + 1}
     form = MenuForm(initial=initial_data)
     context = {
         'form': form,
@@ -78,7 +78,7 @@ def NuevoMenuView(request):
             numeroMenu = form.cleaned_data['numeroMenu']
             nombre = form.cleaned_data['nombre']
             fechaCreacion = form.cleaned_data['fechaCreacion']
-            producto = form.cleaned_data['productos']
+            producto = form.cleaned_data['producto']
             descripcion = form.cleaned_data['descripcion']
             p, created = productos.objects.get_or_create(numeroMenu=numeroMenu,nombre=nombre,fechaCreacion=fechaCreacion,producto=producto, descripcion=descripcion)
             p.save()

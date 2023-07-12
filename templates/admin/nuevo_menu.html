@@ -13,9 +13,9 @@
         <div class="d-flex justify-content-center pt-4">
             <form method="POST" class="border border-2 border-primary p-3 rounded">
                 {% csrf_token %}
-                <div style="display: none">
+                {% comment %} <div style="display: none"> {% endcomment %}
                 numeroProducto<br>{{form.numeroProducto}}<br><br>
-                </div>
+                {% comment %} </div> {% endcomment %}
                 nombre<br> {{form.nombre}}<br><br>
                 fechaCreacion<br> {{form.fechaCreacion}}<br><br>
                 descripcion <br>{{form.descripcion}}<br><br>
