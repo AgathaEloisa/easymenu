@@ -24,11 +24,12 @@
         </div>
         {% comment %} lista {% endcomment %}
         <div>
-            <ul class="list-group" style="width: 500px">
-                <li class="list-group-item">An item</li>
+            <ul class="list-group" id="item" style="width: 500px">
+
             </ul>
         </div>
     </div>
+    {% comment %} listado producto disponibles {% endcomment %}
     <div class="container">
         <br><br>
         <div class="row">
@@ -62,9 +63,7 @@
                     {{producto.categoria}}
                 </td>
                 <td>
-                    <a href="{% url 'administracion:editar_producto' producto.numeroProducto %}">
-                        <button class="btn btn-outline-primary">Agregar</button>
-                    </a>
+                    <button class="btn btn-outline-primary addItem" id="{{producto.numeroProducto}}" onClick="kk({{producto.numeroProducto}})" value="{{producto.numeroProducto}}">Agregar</button>
                 </td>
               </tr>
             {% endfor %}
@@ -72,5 +71,14 @@
           </table>
     </div>
 </div>
+
+<script>
+    productos = [];
+
+    const kk = (id) => {
+        productos.push(id);
+        document.getElementById('item').innerHTML += `<li class="list-group-item">${id}</li>`
+    };
+</script>
 </body>
 </html>
