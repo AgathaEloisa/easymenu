@@ -18,15 +18,15 @@ class carta(models.Model):
     def __str__(self) -> str:
         return self.nombre
     
-class productos(models.Model):
+class Producto(models.Model):
     numeroProducto = models.IntegerField(primary_key=True)
     categoria = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    precio = models.IntegerField()
+    nombre = models.CharField(max_length=100)
+    precio = models.DecimalField(max_digits=8, decimal_places=2)
     descripcion = models.TextField(max_length=250)
 
     def __str__(self) -> str:
         return self.nombre
 
     class Meta:
-        db_table = 'productos'
+        db_table = 'Producto'

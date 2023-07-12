@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap5',
     'easyMenu',
-    'administracion'
+    'administracion',
+    'menu'
 ]
 
 MIDDLEWARE = [
