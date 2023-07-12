@@ -47,47 +47,60 @@
 <body>
     <div class="container">
         <h1>Carrito</h1>
-        <ul id="carritoList" class="list-group">
-            {% for item in carrito_productos %}
-                <li class="list-group-item">
-                    {{ item.producto.categoria }} : {{ item.producto.nombre }} - ${{ item.producto.precio }} - {{ item.producto.descripcion }}
-                    Cantidad: {{ item.cantidad }}
-                    Precio Total: {{ item.precio_total }}
-                    Notas: <span id="notas-{{ item.producto.numeroProducto }}">{{ item.notas }}</span>
-                    <form method="POST" action="{% url 'menu:ver_carrito' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="producto_id" value="{{ item.producto.numeroProducto }}">
-                        <label for="notas-{{ item.producto.numeroProducto }}">Notas:</label><br>
-                        <textarea name="notas" id="notas-{{ item.producto.numeroProducto }}" class="nota-input" rows="4" cols="50">{{ item.notas }}</textarea><br>
-                        <button type="submit" class="btn btn-outline-primary">Agregar nota</button>
-                    </form>
-                    <form method="POST" action="{% url 'menu:eliminar_del_carrito' %}" class="d-flex justify-content-end">
-                        {% csrf_token %}
-                        <input type="hidden" name="producto_id" value="{{ item.producto.numeroProducto }}">
-                        <button type="submit" class="btn btn-primary">Eliminar Producto</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-        
-        <p>Total Precio: {{ total_precio }}</p>
+        <nav class="navbar bg-body-tertiary" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+                <p>Total Precio: {{ total_precio }}</p>
 
-        <form method="POST" action="{% url 'menu:ver_carrito' %}">
-            {% csrf_token %}
-            <label for="numero_mesa">Mesa:</label>
-            <select name="numero_mesa" id="numero_mesa">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-            </select><br><br>
-            <button type="submit" class="btn btn-primary">Enviar Orden</button>
-        </form>
+                <form method="POST" action="{% url 'menu:ver_carrito' %}">
+                    {% csrf_token %}
+                    <label for="numero_mesa">Mesa:</label>
+                    <select name="numero_mesa" id="numero_mesa">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select><br><br>
+                    <button type="submit" class="btn btn-primary">Enviar Orden</button>
+                </form>
+            </div>
+        </nav>
+        <br><br>
+        <div id="carritoList">
+            {% for item in carrito_productos %}
+            <div class="card mb-3" >
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="data:image/jpeg;base64,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" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.cantidad }} {{ item.producto.nombre }} - ${{ item.producto.precio }}</h5>
+                            <p class="card-text">{{ item.producto.descripcion }}</p>
+                            Notas: <span id="notas-{{ item.producto.numeroProducto }}">{{ item.notas }}</span>
+                            <form method="POST" action="{% url 'menu:ver_carrito' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="producto_id" value="{{ item.producto.numeroProducto }}">
+                                <label for="notas-{{ item.producto.numeroProducto }}">Notas:</label><br>
+                                <textarea name="notas" id="notas-{{ item.producto.numeroProducto }}" class="nota-input" rows="4" cols="50">{{ item.notas }}</textarea><br>
+                                <button type="submit" class="btn btn-outline-primary">Agregar nota</button>
+                            </form>
+                            <form method="POST" action="{% url 'menu:eliminar_del_carrito' %}" class="d-flex justify-content-end">
+                                {% csrf_token %}
+                                <input type="hidden" name="producto_id" value="{{ item.producto.numeroProducto }}">
+                                <button type="submit" class="btn btn-primary">Eliminar Producto</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
         <br><br>
 
         <form action="{% url 'menu:menu' %}">

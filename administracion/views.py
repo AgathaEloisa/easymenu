@@ -13,23 +13,6 @@ def AdminView(request):
     return render(request, 'admin/admin.html', context)
 
 def NuevoProductoView(request):
-    # products = Producto.objects.all()
-    # last_product = products.last().numeroProducto if products else 0
-
-    # if request.method == 'POST':
-    #     form = ProductoForm(request.POST)
-    #     if form.is_valid():
-    #         numeroProducto = last_product + 1 if last_product else 1
-    #         form.instance.numeroProducto = numeroProducto
-    #         form.save()
-    #         return redirect('administracion:home')
-    # else:
-    #     initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
-    #     form = ProductoForm(initial=initial_data)
-
-    # context = {'form': form}
-    # return render(request, 'admin/nuevo_producto.html', context)
-
     products = Producto.objects.all()
     last_product = products.last().numeroProducto
     initial_data = {'numeroProducto': last_product + 1} if last_product else {'numeroProducto': 1}
@@ -41,9 +24,6 @@ def NuevoProductoView(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
         if form.is_valid():
-            # producto = form.save(commit=False)
-            # producto.numeroProducto = numeroProducto
-            # producto.save()
             numeroProducto = form.cleaned_data['numeroProducto']
             categoria = form.cleaned_data['categoria']
             nombre = form.cleaned_data['nombre']
