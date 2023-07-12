@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}EasyMenu{% endblock %}</title>
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
@@ -10,18 +10,40 @@
 <div class="container">
   <h1>Nuevo producto</h1>
   <div class="d-flex justify-content-center pt-4">
-<form method="POST" class="border border-2 border-primary p-3 rounded">
-    {% csrf_token %}
-    <div style="display: none">
-    numeroProducto<br>{{form.numeroProducto}}<br><br>
-    </div>
-    categoria<br>{{form.categoria}}<br><br>
-    nombre<br> {{form.nombre}}<br><br>
-    precio<br> {{form.precio}}<br><br>
-    descripcion <br>{{form.descripcion}}<br><br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-<form>
+    <form method="POST" class="border border-2 border-primary p-3 rounded">
+        {% csrf_token %}
+        <div style="display: block">
+        numeroProducto<br>{{form.numeroProducto}}<br><br>
+        </div>
+        {% comment %} categoria<br>{{form.categoria}}<br><br> {% endcomment %}
+        categoria<br>{{form.categoria}}<br><br>
+        {% comment %} <input list="datalistOptions" id="categoriaDataList" placeholder="Categoría"><br>
+        <datalist id="datalistOptions">
+          <option value="entradas">entradas</option>
+          <option value="ensaladas">ensaladas</option>
+          <option value="carnes">carnes</option>
+          <option value="pescados">pescados</option>
+          <option value="pizzas">pizzas</option>
+          <option value="hamburguesas">hamburguesas</option>
+          <option value="tragos">tragos</option>
+          <option value="refrescos">refrescos</option>
+          <option value="jugos">jugos</option>
+          <option value="cervezas">cervezas</option>
+          <option value="vinos">vinos</option>
+        </datalist> {% endcomment %}
+
+        nombre<br> {{form.nombre}}<br><br>
+        precio<br> {{form.precio}}<br><br>
+        descripcion <br>{{form.descripcion}}<br><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    <form>
+  </div>
 </div>
-</div>
+<script>
+  document.getElementById('categoriaDataList').addEventListener('change', (event) => {
+    console.log(categoriaDataList.value)
+    console.log(form.categoria)
+  })
+</script>
 </body>
 </html>

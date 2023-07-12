@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>EasyMenu</title>
+        <title>{% block title %}EasyMenu{% endblock %}</title>
         {% load bootstrap5 %}
         {% bootstrap_css %}
         {% bootstrap_javascript %}
@@ -43,32 +43,6 @@
                 }
             });
         </script>
-        {% comment %} <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            
-            .agregar-btn, .eliminar-btn, .enviar-btn, .volver-btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #337ab7;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 10px;
-            }
-    
-            #btn-mostrar-productos:hover, .btn-agregar-carrito:hover, .ver-carrito-btn:hover {
-                background-color: #23527c;
-            }
-            .nota-input {
-                
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-sizing: border-box;
-            }
-        </style> {% endcomment %}
     </head>
 <body>
     <div class="container">
@@ -76,7 +50,7 @@
         <ul id="carritoList" class="list-group">
             {% for item in carrito_productos %}
                 <li class="list-group-item">
-                    {{ item.producto.numeroProducto }} - {{ item.producto.categoria }} - {{ item.producto.nombre }} - {{ item.producto.precio }} - {{ item.producto.descripcion }}
+                    {{ item.producto.categoria }} : {{ item.producto.nombre }} - ${{ item.producto.precio }} - {{ item.producto.descripcion }}
                     Cantidad: {{ item.cantidad }}
                     Precio Total: {{ item.precio_total }}
                     Notas: <span id="notas-{{ item.producto.numeroProducto }}">{{ item.notas }}</span>

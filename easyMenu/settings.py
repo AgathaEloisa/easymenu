@@ -94,9 +94,6 @@ DATABASES = {
         'NAME': 'easyMenu',
         'HOST': 'localhost',
         'PORT': 27017
-        # 'CLIENT': {
-        #     'host':'27017'
-        # }
     }
 }
 # Password validation
