@@ -7,51 +7,6 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var btnMostrarProductos = document.getElementById('btn-mostrar-productos');
-            var listaProductos = document.getElementById('productos-list');
-    
-            btnMostrarProductos.addEventListener('click', function() {
-                if (listaProductos.style.display === 'none') {
-                    listaProductos.style.display = 'block';
-                } else {
-                    listaProductos.style.display = 'none';
-                }
-            });
-        });
-    </script>
-    
-    <script>
-        $(document).ready(function() {
-            $('.btn-agregar-carrito').click(function(e) {
-                e.preventDefault();
-                var producto_id = $(this).data('producto-id');
-                var cantidad = $(this).parent().find('#cantidad').val();
-                var notas = $(this).parent().find('#notas-' + producto_id).val();  // Obtener el valor de las notas
-                agregarAlCarrito(producto_id, cantidad, notas);
-            });
-    
-            function agregarAlCarrito(producto_id, cantidad, notas) {
-                $.ajax({
-                    url: '{% url 'menu:agregar_al_carrito' %}',
-                    method: 'POST',
-                    data: {
-                        'producto_id': producto_id,
-                        'cantidad': cantidad,
-                        'notas': notas,  // Enviar las notas en la solicitud
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                    },
-                    success: function() {
-                        alert('Producto agregado al carrito');
-                    },
-                    error: function() {
-                        alert('Error al agregar el producto al carrito');
-                    }
-                });
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -92,10 +47,11 @@
                                   <p class="card-text">{{ producto.descripcion }}</p>
                                   <form method="POST" action="{% url 'menu:agregar_al_carrito' %}">
                                     {% csrf_token %}
-                                        <input type="hidden" style="display:none" name="producto_id" value="{{ producto.numeroProducto }}">
+                                        <input type="hidden" style="display:none" name="producto_id" value="{{ producto.numeroProducto }}"></input>
                                         <label for="cantidad">Cantidad:</label>
-                                        <input type="number" name="cantidad" id="cantidad" min="1"><br><br>
-                                        <button class="btn btn-primary" data-producto-id="{{ producto.numeroProducto }}">Agregar al carrito</button>
+                                        <input type="number" name="cantidad" id="cantidad" value="1" min="1"></input>
+                                        <br><br>
+                                        <button class="btn btn-primary" id="btn-agregar-carrito" data-producto-id="{{ producto.numeroProducto }}">Agregar al carrito</button>
                                     </form>
                                   <p class="card-text"><small class="text-body-secondary">{{ producto.categoria}}</small></p>
                                 </div>
@@ -106,6 +62,51 @@
             {% endfor %}
         </div>
     </div>
+    {% comment %} <script> {% endcomment %}
+        {% comment %} document.addEventListener('DOMContentLoaded', function() { {% endcomment %}
+            {% comment %} var btnMostrarProductos = document.getElementById('btn-mostrar-productos'); {% endcomment %}
+            {% comment %} var listaProductos = document.getElementById('productos-list'); {% endcomment %}
+    
+            {% comment %} btnMostrarProductos.addEventListener('click', function() {
+                if (listaProductos.style.display === 'none') {
+                    listaProductos.style.display = 'block';
+                } else {
+                    listaProductos.style.display = 'none';
+                }
+            }); {% endcomment %}
+        {% comment %} }); {% endcomment %}
+    {% comment %} </script> {% endcomment %}
+    
+    <script>
+        $(document).ready(function() {
+            $('#btn-agregar-carrito').click(function(e) {
+                e.preventDefault();
+                var producto_id = $(this).data('producto-id');
+                var cantidad = $(this).parent().find('#cantidad').val();
+                var notas = $(this).parent().find('#notas-' + producto_id).val();  // Obtener el valor de las notas
+                agregarAlCarrito(producto_id, cantidad, notas);
+            });
+    
+            function agregarAlCarrito(producto_id, cantidad, notas) {
+                $.ajax({
+                    url: '{% url 'menu:agregar_al_carrito' %}',
+                    method: 'POST',
+                    data: {
+                        'producto_id': producto_id,
+                        'cantidad': cantidad,
+                        'notas': notas,  // Enviar las notas en la solicitud
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function() {
+                        alert('Producto agregado al carrito');
+                    },
+                    error: function() {
+                        alert('Error al agregar el producto al carrito');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

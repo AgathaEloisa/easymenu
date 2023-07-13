@@ -24,8 +24,7 @@ def mostrar_productos(request):
 def agregar_al_carrito(request):
     if request.method == 'POST':
         producto_id = request.POST.get('producto_id')
-        cantidad = int(request.POST.get('cantidad', 1))
-
+        cantidad = int(request.POST.get('cantidad'))
         carrito = request.session.get('carrito', [])
         for _ in range(cantidad):
             carrito.append(producto_id)
@@ -75,7 +74,7 @@ def ver_carrito(request):
 
         # Asociar los productos seleccionados a la orden
         for producto in productos:
-            cantidad = carrito.count(producto.numeroProducto)
+            cantidad = int(carrito.count(producto.numeroProducto))
             orden_producto = OrdenProducto(orden=orden, producto=producto, cantidad=cantidad, notas=notas_dict.get(str(producto.numeroProducto), ''))  # Agregado el campo 'notas'
             orden_producto.save()
             total_precio += int(str(producto.precio)) * cantidad
