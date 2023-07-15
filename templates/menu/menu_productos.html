@@ -47,11 +47,11 @@
                                   <p class="card-text">{{ producto.descripcion }}</p>
                                   <form method="POST" action="{% url 'menu:agregar_al_carrito' %}">
                                     {% csrf_token %}
-                                        <input type="hidden" style="display:none" name="producto_id" value="{{ producto.numeroProducto }}"></input>
+                                        <input type="hidden" style="display:none" name="producto_id" value="{{ producto.numeroProducto }}">
                                         <label for="cantidad">Cantidad:</label>
-                                        <input type="number" name="cantidad" id="cantidad" value="1" min="1"></input>
+                                        <input type="number" name="cantidad" id="cantidad" value="1" min="1">
                                         <br><br>
-                                        <button class="btn btn-primary" id="btn-agregar-carrito" data-producto-id="{{ producto.numeroProducto }}">Agregar al carrito</button>
+                                        <button class="btn btn-primary btn-agregar-carrito" id="btn-agregar-carrito" data-producto-id="{{ producto.numeroProducto }}">Agregar al carrito</button>
                                     </form>
                                   <p class="card-text"><small class="text-body-secondary">{{ producto.categoria}}</small></p>
                                 </div>
@@ -79,7 +79,7 @@
     
     <script>
         $(document).ready(function() {
-            $('#btn-agregar-carrito').click(function(e) {
+            $('.btn-agregar-carrito').click(function(e) {
                 e.preventDefault();
                 var producto_id = $(this).data('producto-id');
                 var cantidad = $(this).parent().find('#cantidad').val();
@@ -103,7 +103,7 @@
                     error: function() {
                         alert('Error al agregar el producto al carrito');
                     }
-                });
+                });                
             }
         });
     </script>

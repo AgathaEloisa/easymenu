@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ item.cantidad }} {{ item.producto.nombre }} - ${{ item.producto.precio }}</h5>
+                            <h5 class="card-title">{{ item.cantidad }} - {{ item.producto.nombre }} - ${{ item.producto.precio }}</h5>
                             <p class="card-text">{{ item.producto.descripcion }}</p>
                             Notas: <span id="notas-{{ item.producto.numeroProducto }}">{{ item.notas }}</span>
                             <form method="POST" action="{% url 'menu:ver_carrito' %}">
