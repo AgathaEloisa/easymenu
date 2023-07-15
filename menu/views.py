@@ -105,7 +105,7 @@ def ver_carrito(request):
     total_precio = 0
 
     for producto in productos:
-        cantidad = carrito.count(producto.numeroProducto)+1
+        cantidad = carrito.count(str(producto.numeroProducto))
         precio_total = producto.precio * cantidad
         notas = notas_dict.get(str(producto.numeroProducto), '')  # Obtener las notas correspondientes al producto
         carrito_productos.append({'producto': producto, 'cantidad': cantidad, 'precio_total': precio_total, 'notas': notas})
