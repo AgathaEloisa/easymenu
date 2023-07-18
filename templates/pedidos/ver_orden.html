@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ver Orden</title>
+  <title>{% block title %}EasyMenu{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
+  <div class="container">
+    <br><br>
     <h1>Detalles de la Orden</h1>
     <br>
-    <p><strong>Número de Orden:</strong> {{ orden.numeroOrden }}</p>
-    <p><strong>Fecha:</strong> {{ orden.fecha }}</p>
-    <p><strong>Mesa:</strong> {{ orden.mesa }}</p>
-    <p><strong>Mesero:</strong> {{ orden.mesero }}</p>
-    <p><strong>Código de Estado:</strong> {{ orden.codigoEstado }}</p>
-    <p><strong>Productos:</strong></p>
+    <div class="card" style="width: 18rem;">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Número de Orden:</strong> {{ orden.numeroOrden }}</li>
+        <li class="list-group-item"><strong>Fecha:</strong> {{ orden.fecha }}</li>
+        <li class="list-group-item"><strong>Mesa:</strong> {{ orden.mesa }}</li>
+        <li class="list-group-item"><strong>Mesero:</strong> {{ orden.mesero }}</li>
+        <li class="list-group-item"><strong>Código de Estado:</strong> {{ orden.codigoEstado }}</li>
+        <li class="list-group-item"><strong>Productos:</strong></li>
     {% comment %} <ul> {% endcomment %}
       {% comment %} {% for producto in orden.productos %}
         <li>{{ producto }}</li>
       {% endfor %}
     </ul> {% endcomment %}
-    <p><strong>Total:</strong> {{ orden.total }}</p>
-    <br>
-    <a href="{% url 'pedidos:ver_ordenes' %}">Volver a Órdenes</a>
+        <li class="list-group-item"><strong>Total:</strong> {{ orden.total }}</li>
+      </ul>
+    </div>
 </body>
 </html>

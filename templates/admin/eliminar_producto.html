@@ -6,15 +6,13 @@
       {% bootstrap_javascript %}
     </head>
     <body>
-    
-    <div class="container mt-5 ">
-        <h5>¿Estás seguro que deseas eliminar el producto?</h5>
-    <form method="POST">
-        {% csrf_token %}
-        {{form}} 
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-    <form>
-    
-    </div>
+        <div class="container mt-5 ">
+            <h5>¿Estás seguro que deseas eliminar el producto?</h5>
+            <form method="POST">
+                {% csrf_token %}
+                {{form}} 
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            <form>
+        </div>
     </body>
-    </html>
+</html>

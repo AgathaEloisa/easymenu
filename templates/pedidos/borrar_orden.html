@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Borrar Orden</title>
+  <title>{% block title %}EasyMenu{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
-    <h1>Borrar Orden</h1>
+  <div class="container mt-5 ">
+    <h5>Borrar Orden n° {{ orden.numeroOrden }}</h5>
     <p>¿Estás seguro de que deseas borrar la siguiente orden?</p>
-    <p>Número de Orden: {{ orden.numeroOrden }}</p>
-    <p>Fecha: {{ orden.fecha }}</p>
-    <p>Número de Mesa: {{ orden.mesa }}</p>
-    <p>Código de Mesero: {{ orden.mesero }}</p>
-    <p>Productos: {{ orden.productos }}</p>
-    <p>Notas: {{ orden.notas }}</p>
-    <p>Total: {{ orden.total }}</p>
     <form method="post">
         {% csrf_token %}
         <input type="hidden" name="orden_id" value="{{ orden.pk }}">
-        <input type="submit" value="Borrar Orden">
+        <button type="submit" class="btn btn-danger" value="Borrar Orden">Eliminar</button>
     </form>
 </body>
 </html>

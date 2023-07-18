@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Actualizar Orden</title>
+  <title>{% block title %}EasyMenu{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
-      <h1>Actualizar Orden {{orden.numeroOrden}}</h1>
-      <form method="post">
-          {% csrf_token %}
-          <div style="display:none">{{ form.as_p }}</div>
-          Estado: <br>{{ form.codigoEstado }}<br><br>
-          <input type="submit" value="Actualizar Estado">
-        </form>
+  <div class="container">
+    <br><br>
+    <h1>Actualizar Orden {{orden.numeroOrden}}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div style="display:none">{{ form.as_p }}</div>
+      Estado: <br>{{ form.codigoEstado }}<br><br>
+      <button type="submit" class="btn btn-success" value="Actualizar Estado">Actualizar Estado</button>
+    </form>
+  </div>
 </body>
 </html>
