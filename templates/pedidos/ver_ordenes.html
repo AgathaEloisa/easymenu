@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Órdenes</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        
+        th {
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Órdenes</h1>
+    <table>
+        <tr>
+            <th>Número</th>
+            <th>Fecha / Hora</th>
+            <th>Mesa</th>      
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        {% for orden in ordenes %}
+        <tr>
+            <td>{{ orden.numeroOrden }}</td>
+            <td>{{ orden.fecha }}</td>
+            <td>{{ orden.hora }}</td>
+            <td>{{ orden.mesa }}</td>
+            <td>{{ orden.codigoEstado }}</td>
+            <td>
+                <a href="{% url 'pedidos:ver_orden' orden.numeroOrden %}">Ver</a>
+                <a href="{% url 'pedidos:actualizar_orden' orden.numeroOrden %}">Actualizar</a>
+                <a href="{% url 'pedidos:borrar_orden' orden.numeroOrden %}">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    {% comment %} <a href="{% url 'pedidos:crear_orden' %}">Crear Nueva Orden</a> {% endcomment %}
+</body>
+</html>

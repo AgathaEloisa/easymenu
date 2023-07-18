@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'bootstrap5',
     'easyMenu',
     'administracion',
-    'menu'
+    'menu',
+    'pedidos'
 ]
 
 MIDDLEWARE = [

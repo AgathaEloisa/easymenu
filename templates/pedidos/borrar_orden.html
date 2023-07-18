@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Borrar Orden</title>
+</head>
+<body>
+    <h1>Borrar Orden</h1>
+    <p>¿Estás seguro de que deseas borrar la siguiente orden?</p>
+    <p>Número de Orden: {{ orden.numeroOrden }}</p>
+    <p>Fecha: {{ orden.fecha }}</p>
+    <p>Número de Mesa: {{ orden.mesa }}</p>
+    <p>Código de Mesero: {{ orden.mesero }}</p>
+    <p>Productos: {{ orden.productos }}</p>
+    <p>Notas: {{ orden.notas }}</p>
+    <p>Total: {{ orden.total }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="orden_id" value="{{ orden.pk }}">
+        <input type="submit" value="Borrar Orden">
+    </form>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Orden</title>
+</head>
+<body>
+      <h1>Actualizar Orden {{orden.numeroOrden}}</h1>
+      <form method="post">
+          {% csrf_token %}
+          <div style="display:none">{{ form.as_p }}</div>
+          Estado: <br>{{ form.codigoEstado }}<br><br>
+          <input type="submit" value="Actualizar Estado">
+        </form>
+</body>
+</html>
